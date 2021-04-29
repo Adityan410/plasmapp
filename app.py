@@ -26,7 +26,6 @@ def register():
     x = [x for x in request.form.values()]
     print(x)
     params = "name="+x[0]+"&email="+x[1]+"&phone="+x[2]+"&city="+x[3]+"&infect="+x[4]+"&blood="+x[5]+"&password="+x[6]
-
     if('errorType' in check(x[1])):
         url = "https://01r95chpqh.execute-api.us-east-2.amazonaws.com/plasma/registration?"+params
         response = requests.get(url)

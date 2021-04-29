@@ -81,7 +81,7 @@ def requested():
         url="https://www.fast2sms.com/dev/bulkV2?authorization=w4AEhrGpdo7ykxgPeCNnlMz3Bb1uStTiXvsDL56F820VZWmRIjnCo0XLyEZfFWYcAD8w3vKalqtU97kI&sender_id=FSTSMS&message=Plasma of your's is needed&language=english&route=p&numbers="+str(i['phone'])
     result=requests.request("GET",url)
     print(result)
-    phone.append(i['phone'])
+    phone.append(['phone'])
 	  #  emailids.append(i['email'])
     print(phone)
     return render_template('request.html', pred="Your request is sent to the concerned people.")

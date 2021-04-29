@@ -70,8 +70,7 @@ def requester():
 @app.route('/requested',methods=['POST'])
 def requested():
     bloodgrp = request.form['bloodgrp']
-    #print(bloodgrp)
-    url = "https://01r95chpqh.execute-api.us-east-2.amazonaws.com/plasma/requestonbloodgroup?blood="+bloodgrp
+    url = "https://01r95chpqh.execute-api.us-east-2.amazonaws.com/plasma/requestonbloodgroup"+bloodgrp
     status = requests.request("GET",url)
     a=status.json()
     print(a)

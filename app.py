@@ -75,7 +75,7 @@ def requested():
     print(a)
     phone=[]
     for i in a:
-        url=" https://www.fast2sms.com/dev/bulkV2?authorization=QYP4z0c4zufMWoKofSlS9voIP1feAj9I7S5ikgIEpZnVGuIDOKrozMgVfKkf&route=q&message=Request%20sent&language=english&flash=0&numbers="+str(i['phone'])
+        url="https://www.fast2sms.com/dev/fbulkV2?authorization=QYP4z0c4zufMWoKofSlS9voIP1feAj9I7S5ikgIEpZnVGuIDOKrozMgVfKkf&sender_id=FSTSMS&message=Need plasma of your blood&language=english&numbers="+str(i['phone'])
         result=requests.request("GET",url)
         print(result)
         phone.append(i['phone'])

@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Aug  7 11:00:16 2020
-
-@author: Sai Nidhi
-"""
-
 from flask import Flask, render_template, request, redirect, url_for
 import requests
 
@@ -26,18 +19,19 @@ def register():
     x = [x for x in request.form.values()]
     print(x)
     params = "name="+x[0]+"&email="+x[1]+"&phone="+x[2]+"&city="+x[3]+"&infect="+x[4]+"&blood="+x[5]+"&password="+x[6]
+    
     if('errorType' in check(x[1])):
-        url = "https://01r95chpqh.execute-api.us-east-2.amazonaws.com/plasma/registration?"+params
+        url = " https://01r95chpqh.execute-api.us-east-2.amazonaws.com/plasma/registration?"+params
         response = requests.get(url)
         return render_template('register.html', pred="Registration Successful, please login using your details")
     else:
         return render_template('register.html', pred="You are already a member, please login using your details")
 
-@app.route('/')
+@app.route('/')    
 @app.route('/login')
 def login():
     return render_template('login.html')
-
+    
 @app.route('/loginpage',methods=['POST'])
 def loginpage():
     user = request.form['user']
@@ -50,9 +44,9 @@ def loginpage():
         if(passw==data['password']):
             return redirect(url_for('stats'))
         else:
-            return render_template('login.html', pred="Login unsuccessful. You have entered the wrong password.")
-
-
+            return render_template('login.html', pred="Login unsuccessful. You have entered the wrong password.") 
+        
+        
 @app.route('/stats')
 def stats():
     url = "https://01r95chpqh.execute-api.us-east-2.amazonaws.com/plasma/getbloodgroupsdata"
@@ -69,13 +63,13 @@ def requester():
 @app.route('/requested',methods=['POST'])
 def requested():
     bloodgrp = request.form['bloodgrp']
-    url = "https://01r95chpqh.execute-api.us-east-2.amazonaws.com/plasma/requestonbloodgroup"+bloodgrp
+    url = "https://01r95chpqh.execute-api.us-east-2.amazonaws.com/plasma/requestonbloodgroup?blood="+bloodgrp
     status = requests.request("GET",url)
     a=status.json()
     print(a)
     phone=[]
     for i in a:
-        url="https://www.fast2sms.com/dev/bulkV2?authorization=QYP4z0c4zufMWoKofSlS9voIP1feAj9I7S5ikgIEpZnVGuIDOKrozMgVfKkf&sender_id=FSTSMS&message=NEED PLASMA OF YOUR BLOOD&language=english&route=P&numbers="+str(i['phone'])
+        url="https://www.fast2sms.com/dev/bulk?authorization=QYP4z0c4zufMWoKofSlS9voIP1feAj9I7S5ikgIEpZnVGuIDOKrozMgVfKkf&sender_id=FSTSMS&message=Need plasma of your blood&language=english&route=p&numbers="+str(i['phone'])
         result=requests.request("GET",url)
         print(result)
         phone.append(i['phone'])
@@ -83,10 +77,8 @@ def requested():
     print(phone)
 
     return render_template('request.html', pred="Your request is sent to the concerned people.")
-
+    
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=8080)
+    app.run(host='0.0.0.0',port=8080) 
 
-#host='0.0.0.0',port=8080
-#debug=true

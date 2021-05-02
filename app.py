@@ -76,7 +76,7 @@ def requested():
 
     print(phone)
 
-    return render_template('request.html', pred="Your request is sent to the concerned people.")
+    return render_template('request.html', pred=" people.")
     
 
 if __name__ == "__main__":
